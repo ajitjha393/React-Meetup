@@ -7,6 +7,7 @@ function MeetupList({ meetups }) {
 			{meetups.map(({ title, image, address, description, id }) => (
 				<MeetupItem
 					key={id}
+					id={id}
 					title={title}
 					address={address}
 					description={description}
