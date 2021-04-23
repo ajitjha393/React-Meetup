@@ -1,3 +1,5 @@
+import { useHistory } from 'react-router-dom'
+
 import NewMeetupForm from '../../components/Meetups/NewMeetupForm/NewMeetupForm'
 
 import axios from 'axios'
@@ -6,6 +8,8 @@ const FIREBASE_BASE_URL =
 	'https://react-meetup-events-default-rtdb.firebaseio.com'
 
 function NewMeetupPage() {
+	const history = useHistory()
+
 	const addMeetupHandler = async meetupData => {
 		try {
 			const res = await axios.post(
@@ -13,6 +17,7 @@ function NewMeetupPage() {
 				meetupData
 			)
 			console.log(res)
+			history.replace('/')
 		} catch (err) {
 			console.log(err)
 		}
