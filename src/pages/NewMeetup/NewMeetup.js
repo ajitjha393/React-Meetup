@@ -1,10 +1,22 @@
 import NewMeetupForm from '../../components/Meetups/NewMeetupForm/NewMeetupForm'
 
+import axios from 'axios'
+
 const FIREBASE_BASE_URL =
-	'https://react-meetup-events-default-rtdb.firebaseio.com/'
+	'https://react-meetup-events-default-rtdb.firebaseio.com'
 
 function NewMeetupPage() {
-	const addMeetupHandler = meetupData => {}
+	const addMeetupHandler = async meetupData => {
+		try {
+			const res = await axios.post(
+				`${FIREBASE_BASE_URL}/meetups.json`,
+				meetupData
+			)
+			console.log(res)
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
 	return (
 		<section>
