@@ -1,31 +1,36 @@
+import { useEffect, useState } from 'react'
 import MeetupList from '../../components/Meetups/MeetupList/MeetupList'
+import axios from 'axios'
 
-const DUMMY_DATA = [
-	{
-		id: 'm1',
-		title: 'This is a first meetup',
-		image:
-			'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg',
-		address: 'Meetupstreet 5, 12345 Meetup City',
-		description:
-			'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-	},
-	{
-		id: 'm2',
-		title: 'This is a second meetup',
-		image:
-			'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg',
-		address: 'Meetupstreet 5, 12345 Meetup City',
-		description:
-			'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-	},
-]
+const FIREBASE_BASE_URL =
+	'https://react-meetup-events-default-rtdb.firebaseio.com'
 
 function AllMeetupsPage() {
+	const [meetups, setMeetups] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
+
+	useEffect(() => {
+		const fetchAllMeetups = async () => {
+			const res = await axios.get(`${FIREBASE_BASE_URL}/meetups.json`)
+			console.log(res)
+			setIsLoading(false)
+			// setMeetups(res.data)
+		}
+		fetchAllMeetups()
+	}, [])
+
+	if (isLoading) {
+		return (
+			<section>
+				<h1>Loading...</h1>
+			</section>
+		)
+	}
+
 	return (
 		<section>
 			<h1>All Meetups</h1>
-			<MeetupList meetups={DUMMY_DATA} />
+			{meetups.length > 0 && <MeetupList meetups={meetups} />}
 		</section>
 	)
 }
