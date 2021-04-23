@@ -17,10 +17,7 @@ function AllMeetupsPage() {
 			for (const key in res.data) {
 				meetupsList.push({
 					id: key,
-					title: res.data[key].title,
-					image: res.data[key].image,
-					address: res.data[key].address,
-					description: res.data[key].description,
+					...res.data[key],
 				})
 			}
 			setIsLoading(false)
