@@ -1,9 +1,12 @@
 import { createContext, useState } from 'react'
 
-// Creating context obj and defining piece of data that we are managing
+// Creating context obj and defining piece of data that we are managing and for autocompletion
 const FavoritesContext = createContext({
 	favorites: [],
 	totalFavorites: 0,
+	addFavorite: meetup => {},
+	removeFavorites: meetupId => {},
+	meetupIsFavorite: meetupId => {},
 })
 
 function FavoritesContextProvider(props) {
@@ -28,6 +31,9 @@ function FavoritesContextProvider(props) {
 	const contextValue = {
 		favorites: userFavorites,
 		totalFavorites: userFavorites.length,
+		addFavorite: addFavoritesHandler,
+		removeFavorites: removeFavoritesHandler,
+		meetupIsFavorite: meetupIsFavoriteHandler,
 	}
 
 	return (
