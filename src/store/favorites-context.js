@@ -9,7 +9,7 @@ const FavoritesContext = createContext({
 	meetupIsFavorite: meetupId => {},
 })
 
-function FavoritesContextProvider(props) {
+export function FavoritesContextProvider(props) {
 	const [userFavorites, setUserFavorites] = useState([])
 
 	function addFavoritesHandler(newFavMeetup) {
@@ -43,4 +43,4 @@ function FavoritesContextProvider(props) {
 	)
 }
 
-export default FavoritesContextProvider
+export default FavoritesContext
