@@ -13,8 +13,18 @@ function AllMeetupsPage() {
 		const fetchAllMeetups = async () => {
 			const res = await axios.get(`${FIREBASE_BASE_URL}/meetups.json`)
 			console.log(res)
+			const meetupsList = []
+			for (const key in res.data) {
+				meetupsList.push({
+					id: key,
+					title: res.data[key].title,
+					image: res.data[key].image,
+					address: res.data[key].address,
+					description: res.data[key].description,
+				})
+			}
 			setIsLoading(false)
-			// setMeetups(res.data)
+			setMeetups(meetupsList)
 		}
 		fetchAllMeetups()
 	}, [])
